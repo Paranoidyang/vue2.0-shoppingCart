@@ -2,7 +2,9 @@ new Vue({
 	el: '.container',
 	data: {
 		limitNum:3,
-		addressList: []
+		addressList: [],
+		currentIndex:0,
+		shippingMethod:1
 	},
 	mounted: function() {
 		this.$nextTick(function() {
@@ -25,8 +27,18 @@ new Vue({
 				}
 			});
 		},
-		loadMore:function(){
-			this.limitNum = this.addressList.length;
+		// // 展开所有的功能也可以写成方法，然后调用
+		// loadMore:function(){
+		// 	this.limitNum = this.addressList.length;
+		// }
+		setDefault:function(addressId){
+			this.addressList.forEach(function(address,index){
+				if(address.addressId==addressId){
+					address.isDefault = true;
+				}else{
+					address.isDefault = false;
+				}
+			});
 		}
 	}
 });
